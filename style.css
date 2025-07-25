@@ -1,1289 +1,192 @@
-/* Color Variables for easier management */
-:root {
-  /* Base Dark Mode Colors */
-  --dark-primary-bg: #0d1117; /* Very dark background */
-  --dark-secondary-bg: #1a202c; /* Slightly lighter dark background for sections/header */
-  --dark-card-bg: #2d3748; /* Darker background for cards/forms */
-  --dark-text-light: #e6e6e6; /* Light text color */
-  --dark-text-medium: #a0aec0; /* Medium grey text color */
-  --dark-shadow-dark: rgba(0, 0, 0, 0.4);
-  --dark-shadow-light: rgba(0, 0, 0, 0.2);
-  --dark-glow-blue: rgba(0, 123, 255, 0.7);
-  --dark-glow-green: rgba(40, 167, 69, 0.7);
-  --dark-tertiary-bg: #12161e; /* Even darker background for alternating sections */
-
-  /* Light Mode Colors - NEW (Aligned with Logo) */
-  --light-primary-bg: #ffffff; /* White background */
-  --light-secondary-bg: #f0f2f5; /* Light grey for sections/header (lighter than card) */
-  --light-card-bg: #e6e9ee; /* Light grey for cards/forms (darker than secondary) */
-  --light-text-light: #212529; /* Very dark grey/black text */
-  --light-text-medium: #6c757d; /* Medium dark grey text */
-  --light-shadow-dark: rgba(0, 0, 0, 0.15);
-  --light-shadow-light: rgba(0, 0, 0, 0.08);
-  --light-glow-blue: rgba(0, 123, 255, 0.2);
-  --light-glow-green: rgba(40, 167, 69, 0.2);
-  --light-tertiary-bg: #e0e4eb; /* Even lighter background for alternating sections */
-
-  /* Accent Colors (aligned with logo, consistent across themes) */
-  --accent-blue: #548cff; /* Primary blue accent color (from logo) */
-  --accent-blue-hover: #3366cc; /* Darker blue on hover */
-  --accent-green: #28a745; /* Green for success/contact button */
-  --accent-green-hover: #218838; /* Darker green on hover */
-
-  /* CURRENT THEME COLORS - These are the variables used throughout the CSS */
-  --primary-bg: var(--dark-primary-bg);
-  --secondary-bg: var(--dark-secondary-bg);
-  --card-bg: var(--dark-card-bg);
-  --text-light: var(--dark-text-light);
-  --text-medium: var(--dark-text-medium);
-  --shadow-dark: var(--dark-shadow-dark);
-  --shadow-light: var(--dark-shadow-light);
-  --glow-blue: var(--dark-glow-blue);
-  --glow-green: var(--dark-glow-green);
-  --tertiary-bg: var(--dark-tertiary-bg);
-}
-
-/* Light Mode specific variables override */
-body.light-mode {
-  --primary-bg: var(--light-primary-bg);
-  --secondary-bg: var(--light-secondary-bg);
-  --card-bg: var(--light-card-bg);
-  --text-light: var(--light-text-light);
-  --text-medium: var(--light-text-medium);
-  --shadow-dark: var(--light-shadow-dark);
-  --shadow-light: var(--light-shadow-light);
-  --glow-blue: var(--light-glow-blue);
-  --glow-green: var(--light-glow-green);
-  --tertiary-bg: var(--light-tertiary-bg);
-  color: var(--light-text-light); /* Apply main text color from light theme */
-}
-
-/* General Styling */
-body {
-  font-family: "Lato", sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: var(--primary-bg);
-  color: var(--text-light);
-  line-height: 1.6;
-  direction: ltr;
-  scroll-behavior: smooth;
-  background-image: url("images/your_primary_site_background.jpg");
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  position: relative;
-  z-index: 0;
-  transition: background-color 0.5s ease, color 0.5s ease; /* Smooth theme transition */
-}
-
-/* Pseudo-element for a subtle dark/light overlay on the background image */
-body::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* Default dark overlay */
-  z-index: -1;
-}
-
-body.light-mode::before {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.4
-  ); /* Lighter overlay for light mode */
-}
-
-/* Custom Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--primary-bg);
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--accent-blue);
-  border-radius: 5px;
-  transition: background 0.3s ease;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-blue-hover);
-}
-
-/* Text Selection Styling */
-::selection {
-  background: var(--accent-blue);
-  color: white;
-}
-::-moz-selection {
-  background: var(--accent-blue);
-  color: white;
-}
-
-/* General Utilities */
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
-/* Global Heading and Paragraph Styles */
-h1,
-h2,
-h3 {
-  font-family: "Poppins", sans-serif;
-  color: var(--text-light);
-  text-align: center;
-  margin-bottom: 20px;
-  letter-spacing: 0.5px; /* Added for subtle elegance */
-}
-
-p {
-  text-align: center;
-  margin-bottom: 15px;
-  line-height: 1.8; /* Ensure good readability for paragraphs */
-}
-
-/* Header Styling */
-.header {
-  background-color: var(--secondary-bg);
-  padding: 20px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 1000;
-  width: 100%;
-  position: relative;
-  display: flex; /* Use flexbox for header content */
-  align-items: center;
-  justify-content: space-between; /* Distribute items */
-  transition: background-color 0.5s ease, color 0.5s ease,
-    border-bottom 0.5s ease;
-}
-body.light-mode .header {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.header.sticky {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: var(
-    --secondary-bg
-  ); /* will be semi-transparent in JS via data-theme on sticky */
-  box-shadow: 0 5px 15px var(--shadow-dark);
-  padding: 10px 0;
-}
-body.light-mode .header.sticky {
-  box-shadow: 0 5px 15px var(--light-shadow-dark);
-}
-
-.header-content {
-  display: flex;
-  align-items: center;
-  width: 100%; /* Make content wrapper take full width */
-  justify-content: space-between; /* Space between logo/nav/toggle */
-}
-
-.logo-link {
-  display: inline-block;
-  flex-shrink: 0; /* Prevent logo from shrinking */
-}
-
-.header .logo {
-  max-height: 65px;
-  width: auto;
-  vertical-align: middle;
-  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
-  transition: max-height 0.3s ease, filter 0.5s ease;
-}
-body.light-mode .header .logo {
-  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.2));
-}
-
-.header .logo:hover {
-  transform: scale(1.02); /* Slight scale up */
-  filter: drop-shadow(
-    0 0 15px var(--glow-blue)
-  ); /* Slightly more intense glow */
-}
-
-.header.sticky .logo {
-  max-height: 45px;
-}
-
-/* Main Navigation (Navbar) */
-.navbar {
-  flex-grow: 1; /* Allow navbar to take available space */
-  display: flex;
-  justify-content: center; /* Center the navigation items */
-  align-items: center;
-  margin: 0 20px; /* Some horizontal margin to separate from logo/toggle */
-  transition: background-color 0.5s ease;
-}
-
-.navbar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-}
-
-.navbar ul li {
-  margin: 0 25px; /* Increased spacing between nav items */
-}
-
-.navbar ul li:first-child {
-  margin-left: 0;
-}
-
-.navbar a {
-  color: var(--text-medium);
-  text-decoration: none;
-  font-size: 1.15em;
-  font-weight: 700;
-  transition: color 0.3s ease;
-}
-
-.navbar a:hover {
-  color: var(--accent-blue);
-}
-
-/* Theme Toggle Button */
-.theme-toggle-button {
-  background: none;
-  border: none;
-  font-size: 1.5em; /* Icon size */
-  color: var(--text-medium); /* Icon color */
-  cursor: pointer;
-  margin-left: auto; /* Push to the right (overrides general margin if navbar is not flex-grow:1) */
-  padding: 5px; /* Internal padding */
-  flex-shrink: 0; /* Prevent from shrinking */
-  transition: color 0.3s ease;
-}
-.theme-toggle-button:hover {
-  color: var(--accent-blue);
-}
-/* Ensure the correct icon color in light mode */
-body.light-mode .theme-toggle-button {
-  color: var(--light-text-medium);
-}
-body.light-mode .theme-toggle-button:hover {
-  color: var(--accent-blue);
-}
-
-/* Hamburger Menu Icon (For Mobile) */
-.hamburger-menu {
-  display: none; /* Hidden by default */
-  background: none;
-  border: none;
-  font-size: 2em;
-  color: var(--text-light);
-  cursor: pointer;
-  z-index: 1100;
-  padding: 0;
-  margin-left: 15px; /* Space from theme toggle on mobile */
-  flex-shrink: 0; /* Prevent from shrinking */
-  transition: color 0.3s ease;
-}
-.hamburger-menu:hover {
-  color: var(--accent-blue);
-}
-body.light-mode .hamburger-menu {
-  color: var(--light-text-light);
-}
-
-/* Overlay for Side Navbar (Mobile) */
-.overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 999;
-  cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.overlay.active {
-  display: block;
-  opacity: 1;
-}
-
-/* Hero Section Styling */
-.hero-section {
-  position: relative;
-  height: 75vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: var(--text-light);
-  overflow: hidden;
-}
-
-.hero-video-background {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  z-index: -1;
-  transform: translate(-50%, -50%);
-  object-fit: cover; /* This makes the video stretch to cover the entire container */
-  pointer-events: none;
-}
-
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.6),
-    rgba(0, 0, 0, 0.4)
-  );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-}
-/* Adjust overlay for light mode if it should also be light over video */
-body.light-mode .hero-overlay {
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.3),
-    rgba(255, 255, 255, 0.1)
-  );
-}
-
-.hero-content-wrapper {
-  position: relative;
-  z-index: 2;
-  padding: 30px;
-  background-color: rgba(0, 0, 0, 0.35);
-  border-radius: 20px;
-  box-shadow: 0 10px 25px var(--shadow-dark);
-  max-width: 85%;
-}
-body.light-mode .hero-content-wrapper {
-  background-color: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 5px 15px var(--light-shadow-dark);
-}
-
-/* New: SYSCRAFT Technology branding in hero section */
-.syscraft-branding {
-  font-family: "Poppins", sans-serif;
-  font-size: 6em; /* Larger than h1/h2 */
-  font-weight: 700;
-  margin-bottom: 20px;
-  color: var(--text-light);
-  text-shadow: 4px 4px 8px var(--shadow-dark);
-  line-height: 1;
-  letter-spacing: 2px;
-}
-body.light-mode .syscraft-branding {
-  color: var(--light-text-light);
-  text-shadow: 2px 2px 4px var(--light-shadow-dark);
-}
-
-.hero-section h1 {
-  font-size: 3.5em; /* Adjusted to be slightly smaller than the new branding text */
-  margin-bottom: 25px;
-  line-height: 1.15; /* Slightly tighter line height for impact */
-  text-shadow: 3px 3px 6px var(--shadow-dark);
-}
-body.light-mode .hero-section h1,
-body.light-mode .hero-section p {
-  color: var(--light-text-light); /* Make text readable on light hero overlay */
-  text-shadow: 1px 1px 2px var(--light-shadow-dark);
-}
-
-.hero-section p {
-  font-size: 1.4em;
-  margin-bottom: 45px;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-  text-shadow: 2px 2px 4px var(--shadow-dark);
-}
-
-/* CTA Button Styling Enhancements */
-.cta-button {
-  display: inline-flex; /* Changed to inline-flex for better alignment */
-  align-items: center; /* Vertically center items */
-  justify-content: center; /* Horizontally center items */
-  gap: 10px; /* Space between text and spinner */
-  background-color: var(--accent-blue);
-  color: white;
-  padding: 20px 45px;
-  text-decoration: none;
-  border-radius: 12px;
-  font-size: 1.3em;
-  font-weight: 700;
-  transition: background-color 0.3s ease, transform 0.2s ease,
-    box-shadow 0.3s ease;
-  box-shadow: 0 8px 20px var(--glow-blue);
-  animation: pulseBlue 2s infinite ease-in-out; /* Heartbeat animation */
-  position: relative;
-  overflow: hidden;
-  border: none; /* Ensure no default border */
-  cursor: pointer; /* Explicitly set cursor */
-  text-align: center; /* Fallback for text alignment */
-}
-
-/* Keyframes for button pulse animation (Heartbeat) */
-@keyframes pulseBlue {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 8px 20px var(--glow-blue);
-  }
-  14% {
-    transform: scale(1.05); /* Slight enlarge */
-    box-shadow: 0 10px 25px var(--glow-blue);
-  }
-  28% {
-    transform: scale(1);
-    box-shadow: 0 8px 20px var(--glow-blue);
-  }
-  42% {
-    transform: scale(1.05); /* Slight enlarge again */
-    box-shadow: 0 10px 25px var(--glow-blue);
-  }
-  70% {
-    transform: scale(1);
-    box-shadow: 0 8px 20px var(--glow-blue);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 8px 20px var(--glow-blue);
-  }
-}
-
-.cta-button:hover {
-  background-color: var(--accent-blue-hover);
-  transform: translateY(-5px); /* Lift effect */
-  box-shadow: 0 12px 25px var(--glow-blue);
-  animation-play-state: paused; /* Stop heartbeat on hover */
-}
-
-.cta-button:active {
-  transform: translateY(-2px) scale(0.98); /* Simulate a press */
-  box-shadow: 0 4px 10px var(--glow-blue); /* Smaller shadow when pressed */
-}
-
-/* Section Common Styling */
-.services-section,
-.why-us-section,
-.contact-section,
-.projects-section {
-  padding: 100px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  position: relative;
-  overflow: hidden;
-  transition: background-color 0.5s ease, color 0.5s ease;
-}
-body.light-mode .services-section,
-body.light-mode .why-us-section,
-body.light-mode .contact-section,
-body.light-mode .projects-section {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-/* Alternating background colors for sections */
-.projects-section {
-  background-color: var(--primary-bg);
-}
-body.light-mode .projects-section {
-  background-color: var(--light-primary-bg);
-}
-
-.services-section {
-  background-color: var(--secondary-bg);
-}
-body.light-mode .services-section {
-  background-color: var(--light-secondary-bg);
-}
-
-.why-us-section {
-  background-color: var(--primary-bg);
-}
-body.light-mode .why-us-section {
-  background-color: var(--light-primary-bg);
-}
-
-.contact-section {
-  background-color: var(--secondary-bg);
-}
-body.light-mode .contact-section {
-  background-color: var(--light-secondary-bg);
-}
-
-/* Subtle pattern overlay for main content sections */
-.services-section::before,
-.why-us-section::before,
-.contact-section::before,
-.projects-section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('data:image/svg+xml,%3Csvg width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"%3E%3Ccircle cx="1" cy="1" r="1" fill="%23FFFFFF" opacity="0.03"%3E%3C/circle%3E%3C/svg%3E');
-  background-repeat: repeat;
-  opacity: 0.8;
-  z-index: 0;
-  pointer-events: none;
-}
-body.light-mode .services-section::before,
-body.light-mode .why-us-section::before,
-body.light-mode .contact-section::before,
-body.light-mode .projects-section::before {
-  background-image: url('data:image/svg+xml,%3Csvg width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"%3E%3Ccircle cx="1" cy="1" r="1" fill="%23000000" opacity="0.03"%3E%3C/circle%3E%3C/svg%3E');
-  opacity: 0.6;
-}
-
-/* Ensure content is above the pseudo-element pattern */
-.services-section .container,
-.why-us-section .container,
-.contact-section .container,
-.projects-section .container {
-  position: relative;
-  z-index: 1;
-}
-
-.services-section h2,
-.why-us-section h2,
-.contact-section h2,
-.projects-section h2 {
-  font-size: 3.2em;
-  margin-bottom: 60px;
-  color: var(--text-light);
-  position: relative;
-  padding-bottom: 15px;
-}
-body.light-mode .services-section h2,
-body.light-mode .why-us-section h2,
-body.light-mode .contact-section h2,
-body.light-mode .projects-section h2 {
-  color: var(--light-text-light);
-}
-
-.services-section h2::after,
-.why-us-section h2::after,
-.contact-section h2::after,
-.projects-section h2::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 0;
-  width: 100px;
-  height: 5px;
-  background-color: var(--accent-blue);
-  border-radius: 3px;
-}
-
-/* Grid Layout for Services and Why Us */
-.services-grid,
-.why-us-grid,
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 40px;
-  margin-top: 50px;
-}
-
-.service-card,
-.why-us-card,
-.project-card {
-  background: var(--card-bg);
-  padding: 40px;
-  border-radius: 20px;
-  /* More nuanced shadow */
-  box-shadow: 0 4px 6px var(--shadow-light), 0 10px 20px var(--shadow-dark);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease,
-    background-color 0.5s ease;
-  text-align: center;
-  border: 2px solid transparent;
-}
-body.light-mode .service-card,
-body.light-mode .why-us-card,
-body.light-mode .project-card {
-  /* Light mode adjusted shadows */
-  box-shadow: 0 2px 4px var(--light-shadow-light),
-    0 5px 10px var(--light-shadow-dark);
-}
-
-/* Card Pulse Hover Animation */
-@keyframes cardPulse {
-  0% {
-    transform: translateY(-15px) scale(1);
-    box-shadow: 0 15px 30px var(--shadow-dark);
-  }
-  50% {
-    transform: translateY(-17px) scale(1.01);
-    box-shadow: 0 18px 35px var(--glow-blue);
-  }
-  100% {
-    transform: translateY(-15px) scale(1);
-    box-shadow: 0 15px 30px var(--shadow-dark);
-  }
-}
-body.light-mode .service-card:hover,
-body.light-mode .why-us-card:hover,
-body.light-mode .project-card:hover {
-  box-shadow: 0 8px 16px var(--light-glow-blue);
-}
-
-.service-card:hover,
-.why-us-card:hover,
-.project-card:hover {
-  animation: cardPulse 2s infinite ease-in-out; /* 2 ثواني عشان يبقى أبطأ وأسلس */
-  border-color: var(--accent-blue);
-}
-
-.service-card i,
-.why-us-card i {
-  font-size: 4em;
-  margin-bottom: 30px;
-  color: var(--accent-blue);
-  text-shadow: 0 0 10px var(--glow-blue), 0 0 20px var(--glow-blue); /* Deeper glow */
-}
-body.light-mode .service-card i,
-body.light-mode .why-us-card i {
-  text-shadow: 0 0 8px var(--light-glow-blue);
-}
-
-.service-card h3,
-.why-us-card h3,
-.project-card h3 {
-  font-size: 2em;
-  margin-bottom: 18px;
-  color: var(--text-light);
-}
-body.light-mode .service-card h3,
-body.light-mode .why-us-card h3,
-body.light-mode .project-card h3 {
-  color: var(--light-text-light);
-}
-
-.service-card p,
-.why-us-card p,
-.project-card p {
-  font-size: 1.05em;
-  color: var(--text-medium);
-}
-body.light-mode .service-card p,
-body.light-mode .why-us-card p,
-body.light-mode .project-card p {
-  color: var(--light-text-medium);
-}
-
-/* Project Card Specific Styling */
-.project-card img {
-  max-width: 100%;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 10px var(--shadow-light);
-}
-body.light-mode .project-card img {
-  box-shadow: 0 2px 5px var(--light-shadow-light);
-}
-
-.project-card .project-link {
-  display: inline-block;
-  margin-top: 20px;
-  color: var(--accent-blue);
-  text-decoration: none;
-  font-weight: 700;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-body.light-mode .project-card .project-link {
-  color: var(--accent-blue);
-}
-
-.project-card .project-link:hover {
-  color: var(--accent-blue-hover);
-  transform: translateX(5px);
-}
-
-.project-card .project-link i {
-  font-size: 0.9em;
-  margin-left: 5px;
-  transition: transform 0.3s ease;
-}
-
-.project-card .project-link:hover i {
-  transform: translateX(5px);
-}
-
-/* Contact Section Styling */
-.contact-section {
-  background-color: var(--secondary-bg);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 100px 0;
-  transition: background-color 0.5s ease, color 0.5s ease;
-}
-body.light-mode .contact-section {
-  background-color: var(--light-secondary-bg);
-}
-
-.contact-section p {
-  max-width: 700px;
-  margin: 0 auto 50px auto;
-  color: var(--text-medium);
-}
-body.light-mode .contact-section p {
-  color: var(--light-text-medium);
-}
-
-.contact-form {
-  max-width: 650px;
-  width: 100%;
-  margin: 0 auto;
-  background: var(--card-bg);
-  padding: 50px;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px var(--shadow-dark);
-  text-align: left;
-  box-sizing: border-box;
-  transition: background-color 0.5s ease, box-shadow 0.5s ease;
-}
-body.light-mode .contact-form {
-  background: var(--light-card-bg);
-  box-shadow: 0 5px 15px var(--light-shadow-dark);
-}
-
-.contact-form input,
-.contact-form textarea {
-  width: calc(100% - 30px);
-  padding: 18px;
-  margin-bottom: 25px;
-  border: 1px solid var(--text-medium);
-  border-radius: 10px;
-  background-color: var(--primary-bg);
-  color: var(--text-light);
-  font-size: 1.05em;
-  box-sizing: border-box;
-  transition: background-color 0.5s ease, color 0.5s ease,
-    border-color 0.5s ease, box-shadow 0.3s ease; /* Added box-shadow to transition */
-}
-body.light-mode .contact-form input,
-body.light-mode .contact-form textarea {
-  border-color: var(--light-text-medium);
-  background-color: var(--light-primary-bg);
-  color: var(--light-text-light);
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-  outline: none; /* Remove default outline */
-  border-color: var(--accent-blue);
-  box-shadow: 0 0 0 3px var(--glow-blue); /* Subtle glow on focus */
-}
-body.light-mode .contact-form input:focus,
-body.light-mode .contact-form textarea:focus {
-  box-shadow: 0 0 0 3px var(--light-glow-blue);
-}
-
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-  color: var(--text-medium);
-}
-body.light-mode .contact-form input::placeholder,
-body.light-mode .contact-form textarea::placeholder {
-  color: var(--light-text-medium);
-}
-
-.contact-form textarea {
-  resize: vertical;
-}
-
-.contact-form .cta-button {
-  width: 100%;
-  padding: 20px;
-  font-size: 1.3em;
-  background-color: var(--accent-green);
-  box-shadow: 0 8px 20px var(--glow-green);
-  animation: pulseGreen 2s infinite ease-in-out;
-  position: relative;
-  overflow: hidden;
-  transition: background-color 0.3s ease, transform 0.2s ease,
-    box-shadow 0.3s ease;
-}
-body.light-mode .contact-form .cta-button {
-  box-shadow: 0 4px 10px var(--light-glow-green);
-}
-
-/* Keyframes for green button pulse animation */
-@keyframes pulseGreen {
-  0% {
-    box-shadow: 0 8px 20px var(--glow-green);
-  }
-  50% {
-    box-shadow: 0 8px 30px var(--glow-green);
-  }
-  100% {
-    box-shadow: 0 8px 20px var(--glow-green);
-  }
-}
-
-.contact-form .cta-button:hover {
-  background-color: var(--accent-green-hover);
-  transform: translateY(-5px);
-  box-shadow: 0 12px 25px var(--glow-green);
-  animation: none; /* توقف الـ pulse عند الـ hover */
-}
-
-.contact-form .cta-button:active {
-  transform: translateY(-2px) scale(0.98); /* Simulate a press */
-  box-shadow: 0 4px 10px var(--glow-green); /* Smaller shadow when pressed */
-}
-
-/* Loading Spinner for button */
-.cta-button .spinner {
-  border: 4px solid rgba(255, 255, 255, 0.3);
-  border-top: 4px solid #fff;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  animation: spin 1s linear infinite;
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 10px;
-
-  opacity: 0;
-  transform: scale(0);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  pointer-events: none;
-}
-
-.cta-button .button-text {
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  display: inline-block;
-}
-
-.cta-button.loading .spinner {
-  opacity: 1;
-  transform: scale(1);
-  pointer-events: auto;
-}
-
-.cta-button.loading .button-text {
-  opacity: 0;
-  transform: scale(0);
-}
-
-.cta-button.loading {
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Footer Styling */
-.footer {
-  background-color: var(--secondary-bg);
-  color: var(--text-medium);
-  text-align: center;
-  padding: 30px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  transition: background-color 0.5s ease, color 0.5s ease;
-}
-body.light-mode .footer {
-  background-color: var(--light-secondary-bg);
-  color: var(--light-text-medium);
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.footer-contact-info {
-  margin-top: 15px;
-  font-size: 0.95em;
-  color: var(--text-medium);
-}
-body.light-mode .footer-contact-info {
-  color: var(--light-text-medium);
-}
-.footer-contact-info a {
-  color: var(--text-medium);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-body.light-mode .footer-contact-info a {
-  color: var(--light-text-medium);
-}
-.footer-contact-info a:hover {
-  color: var(--accent-blue);
-}
-
-.social-icons {
-  margin-top: 20px;
-}
-
-.social-icons a {
-  color: var(--text-medium);
-  font-size: 1.8em;
-  margin: 0 15px;
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-body.light-mode .social-icons a {
-  color: var(--light-text-medium); /* Default for light mode */
-}
-
-/* New: Hover effect for social icons in light mode */
-.social-icons a:hover {
-  color: var(--accent-blue); /* Always blue on hover */
-}
-
-/* Custom Message Modal Styling */
-.message-modal {
-  display: none;
-  position: fixed;
-  z-index: 2000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.6);
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(5px);
-}
-
-.modal-content {
-  background-color: var(--card-bg);
-  margin: 15% auto;
-  padding: 30px;
-  border: 1px solid var(--accent-blue);
-  border-radius: 15px;
-  width: 80%;
-  max-width: 400px;
-  position: relative;
-  text-align: center;
-  box-shadow: 0 10px 30px var(--shadow-dark);
-  animation: fadeIn 0.3s ease-out;
-  transition: background-color 0.5s ease, box-shadow 0.5s ease;
-}
-body.light-mode .modal-content {
-  background-color: var(--light-card-bg);
-  box-shadow: 0 5px 15px var(--light-shadow-dark);
-}
-
-.modal-content.success {
-  border-color: var(--accent-green);
-}
-
-.modal-content.error {
-  border-color: #dc3545;
-}
-
-.modal-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-body i.fas {
-  font-size: 3em;
-  margin-bottom: 15px;
-}
-
-.modal-body i.success-icon {
-  color: var(--accent-green);
-}
-
-.modal-body i.error-icon {
-  color: #dc3545; /* Red color for error */
-}
-
-.modal-content p {
-  font-size: 1.2em;
-  color: var(--text-light);
-  margin-bottom: 0;
-}
-body.light-mode .modal-content p {
-  color: var(--light-text-light);
-}
-
-.close-button {
-  color: var(--text-medium);
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.close-button:hover,
-.close-button:focus {
-  color: var(--text-light);
-  text-decoration: none;
-  cursor: pointer;
-}
-body.light-mode .close-button {
-  color: var(--light-text-medium);
-}
-body.light-mode .close-button:hover,
-body.light-mode .close-button:focus {
-  color: var(--light-text-light);
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* --- New Animations for elements --- */
-/* For hero section text and button */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.fade-in-up {
-  animation: fadeInUp 0.6s ease-out forwards;
-  opacity: 0;
-}
-
-/* Delays for cascading entrance effect */
-.fade-in-up.delay-1 {
-  animation-delay: 0.2s;
-}
-.fade-in-up.delay-2 {
-  animation-delay: 0.4s;
-}
-.fade-in-up.delay-3 {
-  /* Added for the CTA button */
-  animation-delay: 0.6s;
-}
-
-/* For scroll reveal items (the cards/sections) */
-.reveal-item {
-  opacity: 0;
-  transform: translateY(50px);
-  /* Changed to 'all' for smooth transitionDelay from JS */
-  transition: all 0.6s ease-out;
-}
-
-.reveal-item.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .header-content {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+document.addEventListener("DOMContentLoaded", function () {
+  const websiteBody = document.getElementById("website-body");
+  const mainNavbar = document.getElementById("main-navbar");
+  const hamburgerMenu = document.querySelector(".hamburger-menu");
+  const navbar = document.getElementById("main-nav");
+  const navOverlay = document.getElementById("nav-overlay");
+  const navLinks = document.querySelectorAll("#main-nav ul li a");
+
+  // Theme Toggle Elements
+  const themeToggleBtn = document.getElementById("theme-toggle");
+  const themeToggleIcon = themeToggleBtn
+    ? themeToggleBtn.querySelector("i")
+    : null;
+
+  // --- Theme Mode Functionality ---
+  const savedTheme = localStorage.getItem("theme"); // Get saved theme from local storage
+
+  // Function to apply a theme
+  function applyTheme(theme) {
+    if (theme === "light") {
+      websiteBody.classList.add("light-mode");
+      if (themeToggleIcon) themeToggleIcon.className = "fas fa-sun"; // Change to sun icon
+    } else {
+      websiteBody.classList.remove("light-mode");
+      if (themeToggleIcon) themeToggleIcon.className = "fas fa-moon"; // Change to moon icon
+    }
   }
 
-  .hamburger-menu {
-    display: block; /* Show hamburger menu on small screens */
-    margin-left: 15px; /* Space it from theme toggle button */
+  // Set initial theme on load
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  } else if (
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: light)").matches
+  ) {
+    // If no theme saved, check system preference (default to light if system is light)
+    applyTheme("light");
+  } else {
+    // Default to dark mode if no saved preference and system is not light
+    applyTheme("dark");
   }
 
-  /* Hide main navigation on small screens */
-  .navbar {
-    display: none;
-    position: fixed; /* For side navigation */
-    top: 0;
-    right: -250px;
-    width: 250px;
-    height: 100%;
-    background-color: var(--secondary-bg);
-    padding-top: 80px;
-    box-shadow: -5px 0 15px var(--shadow-dark);
-    transition: right 0.3s ease-in-out, background-color 0.5s ease;
-    z-index: 1000;
-    overflow-y: auto;
+  // Toggle theme on button click
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener("click", function () {
+      let currentTheme = websiteBody.classList.contains("light-mode")
+        ? "light"
+        : "dark";
+      if (currentTheme === "light") {
+        applyTheme("dark");
+        localStorage.setItem("theme", "dark"); // Save preference
+      } else {
+        applyTheme("light");
+        localStorage.setItem("theme", "light"); // Save preference
+      }
+    });
   }
-  body.light-mode .navbar {
-    background-color: var(--light-secondary-bg);
-    box-shadow: -5px 0 15px var(--light-shadow-dark);
+  // --- End Theme Mode Functionality ---
+
+  // Sticky Navbar functionality
+  window.addEventListener("scroll", function () {
+    if (window.scrollY > 50) {
+      mainNavbar.classList.add("sticky");
+    } else {
+      mainNavbar.classList.remove("sticky");
+    }
+  });
+
+  // Toggle Side Navbar on Hamburger click
+  hamburgerMenu.addEventListener("click", function () {
+    navbar.classList.toggle("active");
+    navOverlay.classList.toggle("active");
+    document.body.classList.toggle("no-scroll"); // Disable scroll when menu is open
+  });
+
+  // Close Side Navbar on Overlay click
+  navOverlay.addEventListener("click", function () {
+    navbar.classList.remove("active");
+    navOverlay.classList.remove("active");
+    document.body.classList.remove("no-scroll");
+  });
+
+  // Close Side Navbar when a link is clicked (for smooth scrolling)
+  navLinks.forEach((link) => {
+    link.addEventListener("click", function () {
+      navbar.classList.remove("active");
+      navOverlay.classList.remove("active");
+      document.body.classList.remove("no-scroll");
+    });
+  });
+
+  // Form Submission
+  const contactForm = document.querySelector(".contact-form");
+  const submitButton = document.getElementById("submit-button");
+  const buttonText = submitButton
+    ? submitButton.querySelector(".button-text")
+    : null;
+  const spinnerElement = submitButton
+    ? submitButton.querySelector(".spinner")
+    : null;
+  const messageModal = document.getElementById("message-modal");
+  const modalMessage = document.getElementById("modal-message");
+  const closeModalButton = document.querySelector(".close-button");
+  const modalIcon = document.getElementById("modal-icon"); // New: Modal icon element
+
+  if (
+    contactForm &&
+    submitButton &&
+    messageModal &&
+    modalMessage &&
+    closeModalButton &&
+    buttonText &&
+    spinnerElement &&
+    modalIcon // Check for the new modal icon
+  ) {
+    contactForm.addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevent default form submission
+
+      submitButton.classList.add("loading"); // This class will hide text and show spinner via CSS
+
+      // Simulate API call (replace with actual API call)
+      setTimeout(() => {
+        const isSuccess = Math.random() > 0.5; // Simulate success/failure
+
+        submitButton.classList.remove("loading"); // Remove loading class to revert button state
+
+        if (isSuccess) {
+          modalMessage.textContent = "Your message has been sent successfully!";
+          modalIcon.className = "fas fa-check-circle success-icon"; // Green check icon
+          messageModal
+            .querySelector(".modal-content")
+            .classList.remove("error");
+          messageModal.querySelector(".modal-content").classList.add("success");
+          contactForm.reset(); // Clear the form fields
+        } else {
+          modalMessage.textContent =
+            "Failed to send message. Please try again.";
+          modalIcon.className = "fas fa-times-circle error-icon"; // Red cross icon
+          messageModal
+            .querySelector(".modal-content")
+            .classList.remove("success");
+          messageModal.querySelector(".modal-content").classList.add("error");
+        }
+        messageModal.style.display = "flex"; // Show the modal
+      }, 2000); // Simulate 2-second delay
+    });
+
+    closeModalButton.addEventListener("click", function () {
+      messageModal.style.display = "none";
+    });
+
+    window.addEventListener("click", function (event) {
+      if (event.target == messageModal) {
+        messageModal.style.display = "none";
+      }
+    });
+  } else {
+    console.warn(
+      "Contact form elements or their children not found. Form submission functionality might be affected."
+    );
   }
 
-  .navbar.active {
-    right: 0; /* Slide in when active */
-    display: flex; /* Make it flex column when active */
-    flex-direction: column;
-    justify-content: flex-start;
+  // Scroll Reveal Animation with staggered effect
+  const revealItems = document.querySelectorAll(".reveal-item");
+
+  function revealOnScroll() {
+    const windowHeight = window.innerHeight;
+    revealItems.forEach((item, index) => {
+      const itemTop = item.getBoundingClientRect().top;
+      const itemPoint = 150; // Adjust this value to control when the animation triggers
+
+      if (itemTop < windowHeight - itemPoint) {
+        if (!item.classList.contains("revealed")) {
+          // Apply a delay based on its index within the collection
+          // This creates a staggered/cascading effect for items in a grid/list
+          item.style.transitionDelay = `${index * 0.1}s`; // 0s, 0.1s, 0.2s, etc.
+          item.classList.add("revealed");
+        }
+      } else {
+        // Optional: remove 'revealed' class if element goes out of view again
+        // to re-trigger animation on scroll up/down. Uncomment if desired.
+        // if (item.classList.contains("revealed")) {
+        //     item.classList.remove("revealed");
+        //     item.style.transitionDelay = '0s'; // Reset delay
+        // }
+      }
+    });
   }
 
-  .navbar ul {
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-  }
-
-  .navbar ul li {
-    margin: 0;
-    width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  }
-  body.light-mode .navbar ul li {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  }
-
-  .navbar ul li:last-child {
-    border-bottom: none;
-  }
-
-  .navbar a {
-    display: block;
-    padding: 15px 20px;
-    font-size: 1.2em;
-    color: var(--text-light);
-  }
-  body.light-mode .navbar a {
-    color: var(--light-text-light);
-  }
-
-  .navbar a:hover {
-    background-color: var(--card-bg);
-    color: var(--accent-blue);
-  }
-  body.light-mode .navbar a:hover {
-    background-color: var(--light-card-bg);
-  }
-
-  /* Make sure theme toggle button is visible and responsive */
-  .theme-toggle-button {
-    font-size: 1.2em;
-    margin-right: 15px;
-    margin-left: auto; /* Push it to the right before hamburger */
-  }
-
-  /* Prevent scrolling when the side menu is open */
-  body.no-scroll {
-    overflow: hidden;
-  }
-
-  .syscraft-branding {
-    font-size: 4em; /* Adjust for smaller screens */
-    margin-bottom: 15px;
-  }
-
-  .hero-section h1 {
-    font-size: 2.8em;
-  }
-
-  .hero-section p {
-    font-size: 1.1em;
-  }
-
-  .cta-button {
-    padding: 15px 30px;
-    font-size: 1.1em;
-  }
-
-  .services-section h2,
-  .why-us-section h2,
-  .contact-section h2,
-  .projects-section h2 {
-    font-size: 2.5em;
-  }
-
-  .services-grid,
-  .why-us-grid,
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .service-card,
-  .why-us-card,
-  .project-card {
-    padding: 30px;
-  }
-
-  .service-card i,
-  .why-us-card i {
-    font-size: 3.5em;
-  }
-
-  .service-card h3,
-  .why-us-card h3,
-  .project-card h3 {
-    font-size: 1.6em;
-  }
-
-  .contact-form {
-    padding: 35px;
-  }
-}
-
-@media (max-width: 480px) {
-  .header .logo {
-    max-height: 40px;
-  }
-
-  .hero-section {
-    height: auto;
-    padding: 60px 0;
-  }
-
-  .hero-content-wrapper {
-    padding: 25px 10px;
-  }
-
-  .syscraft-branding {
-    font-size: 2.8em; /* Further adjust for very small screens */
-  }
-
-  .hero-section h1 {
-    font-size: 2.2em;
-  }
-
-  .hero-section p {
-    font-size: 0.95em;
-  }
-
-  .social-icons a {
-    font-size: 1.5em;
-    margin: 0 10px;
-  }
-}
+  window.addEventListener("scroll", revealOnScroll);
+  revealOnScroll(); // Run once on load to reveal elements already in view
+});
